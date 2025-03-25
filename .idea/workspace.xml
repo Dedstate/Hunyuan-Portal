@@ -4,14 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1e4d46ef-a0b8-4153-8b49-c7e89d3c41f7" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/Hunyuan_Portal.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hunyuan_shell.py" afterDir="false" />
+    <list default="true" id="1e4d46ef-a0b8-4153-8b49-c7e89d3c41f7" name="Changes" comment="Добавление интерактивной оболочки Hunyuan T1 и конфигурационных файлов проекта">
+      <change afterPath="$PROJECT_DIR$/hunyuan.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hunyuan_shell.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,12 +60,37 @@
       <option name="presentableId" value="Default" />
       <updated>1742906397494</updated>
       <workItem from="1742906398526" duration="1647000" />
-      <workItem from="1742908086612" duration="2014000" />
+      <workItem from="1742908086612" duration="2259000" />
+      <workItem from="1742921103819" duration="1823000" />
     </task>
+    <task id="LOCAL-00001" summary="Добавление интерактивной оболочки Hunyuan T1 и конфигурационных файлов проекта">
+      <option name="closed" value="true" />
+      <created>1742910247277</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1742910247277</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Добавление интерактивной оболочки Hunyuan T1 и конфигурационных файлов проекта" />
+    <option name="LAST_COMMIT_MESSAGE" value="Добавление интерактивной оболочки Hunyuan T1 и конфигурационных файлов проекта" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Hunyuan_Portal$main.coverage" NAME="main Coverage Results" MODIFIED="1742907122658" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
