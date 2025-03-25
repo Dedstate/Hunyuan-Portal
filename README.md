@@ -104,7 +104,7 @@ python hunyuan.py [COMMAND] [ARGUMENTS] [OPTIONS]
 
 ### `chat` - Interactive Chat Session
 
-Starts a loop where you can send messages to the model and receive replies. Type `exit` or `quit` to end the session.
+Start a loop where you can send messages to the model and receive replies. Type `exit` or `quit` to end the session.
 
 ```bash
 python hunyuan.py chat [OPTIONS]
@@ -199,7 +199,7 @@ Currently, configuration is handled directly via command-line options (`--url`, 
    *(Make sure linters like `ruff` or `black`, and test runners like `pytest` are included as development dependencies
    in `pyproject.toml`)*
 
-3. **Running Tests (Example - if tests exist):**
+3. **Running Tests (Example—if tests exist):**
    ```bash
    # Ensure you have tests in a 'tests/' directory and pytest installed
    poetry run pytest
@@ -215,7 +215,7 @@ Currently, configuration is handled directly via command-line options (`--url`, 
 
 ## 🤝 Contributing
 
-Contributions are welcome! If you have suggestions, bug reports, or want to contribute code:
+Contributions are welcome. If you have suggestions, bug reports, or want to contribute code:
 
 1. **Check for existing issues:** Please search the [Issues](https://github.com/Dedstate/Hunyuan-Portal/issues) page to
    see if your question or bug has already been reported.
@@ -244,7 +244,7 @@ Contributions are welcome! If you have suggestions, bug reports, or want to cont
 This project is licensed under the MIT License. See the `LICENSE` file for details. *(Note: Ensure a `LICENSE` file
 containing the MIT license text exists in the repository).*
 
-## 📧 Contact
+## Contact
 
 For issues or questions regarding the tool, please use
 the [GitHub Issues](https://github.com/Dedstate/Hunyuan-Portal/issues) page.
