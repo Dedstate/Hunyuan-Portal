@@ -1,0 +1,5 @@
+<div class="chat-message {% if msg.role == 'user' %}user-message{% else %}bot-message{% endif %}">
+    {# Removed explicit role display, color indicates it #}
+    <div>{{ msg.content|safe }}</div>
+    {# Use safe filter #}
+</div>
