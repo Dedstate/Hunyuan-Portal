@@ -1,17 +1,20 @@
+import logging
 from typing import Optional
 
-# Import GradioClient and specific errors if needed elsewhere,
-# but we will not use a specific one in connect_client's except block now.
 from gradio_client import Client as GradioClient
 
-# from gradio_client import errors as gradio_errors # Keep if needed for query_hunyuan_model
-
-# --- Constants related to the service ---
 DEFAULT_GRADIO_URL: str = "tencent/Hunyuan-T1"
 GRADIO_API_ENDPOINT: str = "/chat"
 
+# Optionally, allow users of this module to enable debug-level logging
+logger = logging.getLogger("hunyuan_app.core.client")
+if not logger.hasHandlers():
+    handler = logging.StreamHandler()
+    handler.setFormatter(logging.Formatter("%(asctime)s %(levelname)s %(name)s: %(message)s"))
+    logger.addHandler(handler)
+logger.setLevel(logging.INFO)
 
-# --- Custom Exceptions ---
+
 class ConnectionSetupError(Exception):
     """Custom exception for errors during Gradio client initialization."""
     pass
@@ -21,12 +24,6 @@ class PredictionError(Exception):
     """Custom exception for errors during the prediction call."""
     pass
 
-
-# --- Core Functions ---
-
-# Optional: Setup logging if you want more detailed internal logs
-# logger = logging.getLogger(__name__)
-# logging.basicConfig(level=logging.INFO) # Configure as needed
 
 def connect_client(url: str) -> GradioClient:
     """
@@ -41,17 +38,20 @@ def connect_client(url: str) -> GradioClient:
     Raises:
         ConnectionSetupError: If the connection or client initialization fails.
     """
-    # logger.info(f"Attempting to connect to Gradio Space: {url}")
+    logger.info(f"Attempting to connect to Gradio Space: {url}")
     try:
         client = GradioClient(url)
-        # logger.info(f"Successfully connected to {url}")
+        logger.info(f"Successfully connected to {url}")
         return client
-    # CORRECTED except block: Removed gradio_utils.error.Error
-    except (ValueError, Exception) as e:
-        # Catch ValueError for bad URLs and general Exception for others
-        # (like network issues, space not found errors during init).
+    except ValueError as e:
+        # ValueError for bad URLs
+        error_message = f"Invalid URL or repo ID '{url}': {e}"
+        logger.error(error_message)
+        raise ConnectionSetupError(error_message) from e
+    except Exception as e:
+        # Network issues, Space not found, or other errors
         error_message = f"Could not initialize client for '{url}'. Reason: {e}"
-        # logger.error(error_message, exc_info=True) # Log detailed error if needed
+        logger.error(error_message, exc_info=logger.level <= logging.DEBUG)
         raise ConnectionSetupError(error_message) from e
 
 
@@ -69,30 +69,42 @@ def query_hunyuan_model(
         api_endpoint: The specific API endpoint name on the Gradio server.
 
     Returns:
-        The model's response as a string. Returns an empty string if the
-        response is None.
+        The model's response as a string.
+        Returns an empty string if the response is None.
 
     Raises:
         ConnectionError: If the API call fails due to network/connection issues.
         PredictionError: For other unexpected errors during the prediction.
     """
+    logger.info(f"Querying endpoint '{api_endpoint}' with message: {message[:60]}...")
     try:
-        # logger.debug(f"Querying endpoint '{api_endpoint}' with message: '{message[:50]}...'")
         response: Optional[str] = client.predict(
             message,
             api_name=api_endpoint
         )
-        # logger.debug(f"Received response: '{str(response)[:50]}...'")
-
+        logger.debug(f"Model response: {str(response)[:100]}...")
         return str(response) if response is not None else ""
 
     except ConnectionError as e:
-        # Handle network errors during the API call specifically
-        # logger.error(f"Gradio API call failed due to network issue: {e}", exc_info=False)
-        # Re-raise for the caller (CLI) to handle
+        logger.error(f"Gradio API call failed due to network issue: {e}")
         raise ConnectionError(f"Gradio API call failed due to network issue: {e}") from e
     except Exception as e:
-        # Handle other errors (e.g., internal Gradio app errors, timeouts)
-        # logger.error(f"An unexpected error occurred during prediction: {e}", exc_info=True)
-        # Re-rise as a custom error for the caller (CLI) to handle
-        raise PredictionError(f"An unexpected error occurred during prediction: {e}") from e
+        logger.error(f"Prediction failed: {e}", exc_info=logger.level <= logging.DEBUG)
+        raise PredictionError(f"Prediction failed: {e}") from e
+
+
+# Future: add utility to test connection or get model metadata
+def ping_client(client: GradioClient) -> bool:
+    """
+    Attempt a trivial call to verify the client is alive.
+
+    Returns:
+        True if successful, False otherwise.
+    """
+    try:
+        client.view_api()
+        logger.debug("Gradio client is responsive.")
+        return True
+    except Exception as e:
+        logger.warning(f"Gradio client ping failed: {e}")
+        return False
